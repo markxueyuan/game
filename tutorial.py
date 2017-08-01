@@ -2,6 +2,7 @@ from __future__ import print_function
 import numpy as np
 
 import gambit
+from fractions import Fraction
 
 # Build extensive game
 
@@ -77,6 +78,36 @@ p4.strategy_value(g4.players[0].strategies[0])
 
 # Behavior strategies
 
-p5 =g4.mixed_behavior_profile()
+g5 = gambit.Game.read_game(gamepath + "e02.efg")
 
+p5 =g5.mixed_behavior_profile()
+
+list(p5)
+
+print(p5[g5.players[0]])
+
+print(p5[g5.players[1]])
+
+    # check infosets
+print(p5[g5.players[0].infosets[0]])
+
+print(p5[g5.players[0].infosets[0].actions[0]])
+
+
+# mix <--> behavior conversion
+
+p55 = p5.as_strategy()
+
+p50 = p55.as_behavior()
+
+
+p5 == p50
+p5 is p50
+
+# Mash equilibrium
+
+    # Pure
+
+PureSolver = gambit.nash.ExternalEnumPureSolver()
+PrisonerDelimma = PureSolver.solve(g2)
 
